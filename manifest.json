@@ -1,0 +1,13 @@
+{
+  "name": "CF-GitGud",
+  "description": "Randomizer util for Codeforces",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": [
+        "tabs",
+        "activeTab",
+  ],
+  "action": {
+    "default_popup": "main.html"
+  }
+}
