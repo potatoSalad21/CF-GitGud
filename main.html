@@ -7,8 +7,13 @@
         <form id="search">
             <input id="searchbar" type="search" placeholder="problem code...">
             <div id="msg"></div>
-            <button id="srchbtn" type="submit">Search</button>
+            <div id="options">
+                <label for="hardbtn">Hardcore Mode:</label>
+                <input id="hardbtn" type="checkbox">
+            </div>
+            <button class="btn" id="srchbtn" type="submit">Search</button>
         </form>
+        <button class="btn" id="randbtn">Randomize</button>
         <script defer src="popup.js"></script>
     </body>
 </html>
