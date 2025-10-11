@@ -1,0 +1,53 @@
+body {
+    font-family: system-ui, sans-serif;
+    background: #f5f6fa;
+    margin: 0;
+    padding: 16px;
+    width: 260px; /* good popup width */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#searchbar {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+#searchbar:focus {
+    border-color: #0078d7;
+    box-shadow: 0 0 5px rgba(0, 120, 215, 0.3);
+}
+
+#msg {
+    font-size: 13px;
+    color: red;
+    min-height: 18px; /* keeps layout stable even when empty */
+}
+
+#srchbtn {
+    background: #0078d7;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+#srchbtn:hover {
+    background: #005fa3;
+}
+
+#srchbtn:active {
+    background: #004f8a;
+}
+
