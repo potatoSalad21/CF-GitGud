@@ -9,5 +9,8 @@
   ],
   "action": {
     "default_popup": "main.html"
+  },
+  "icons": {
+        "16": "assets/logo.png"
   }
 }
