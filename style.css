@@ -32,7 +32,7 @@ form {
     min-height: 18px; /* keeps layout stable even when empty */
 }
 
-#srchbtn {
+.btn {
     background: #0078d7;
     color: white;
     border: none;
@@ -43,11 +43,11 @@ form {
     transition: background 0.2s ease;
 }
 
-#srchbtn:hover {
+.btn:hover {
     background: #005fa3;
 }
 
-#srchbtn:active {
+.btn:active {
     background: #004f8a;
 }
 

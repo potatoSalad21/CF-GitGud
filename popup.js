@@ -19,3 +19,6 @@ search.onsubmit = (e) => {
     const letter = code[code.length-1];
     chrome.tabs.create({ url: `https://codeforces.com/problemset/problem/${num}/${letter}` });
 }
+
+randbtn.onclick = () => {
+}
