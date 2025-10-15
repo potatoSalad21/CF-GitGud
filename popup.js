@@ -3,6 +3,13 @@ function displayErr(err) {
     msg.innerHTML = err;
 }
 
+function randInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+const API_URL = "https://codeforces.com/api/problemset.problems";
+const PROBLEM_URL = "https://codeforces.com/problemset/problem";
+
 search.onsubmit = (e) => {
     e.preventDefault();
     msg.innerHTML = "";
@@ -15,10 +22,24 @@ search.onsubmit = (e) => {
         return;
     }
 
-    const num = code.slice(0, code.length-1);
-    const letter = code[code.length-1];
-    chrome.tabs.create({ url: `https://codeforces.com/problemset/problem/${num}/${letter}` });
+    const contestID = code.slice(0, code.length-1);
+    const idx = code[code.length-1];
+    chrome.tabs.create({ url: `${PROBLEM_URL}/${contestID}/${idx}` });
 }
 
 randbtn.onclick = () => {
+    let contestID;
+    let idx;
+    fetch(API_URL)
+        .then(resp => resp.json())
+        .then(data => {
+            const sz = data.result.problems.length;
+            const problem = data.result.problems[randInt(0, sz-1)];
+            contestID = problem.contestId;
+            idx = problem.index;
+            if (contestID && idx) {
+                chrome.tabs.create({ url: `${PROBLEM_URL}/${contestID}/${idx}` });
+            }
+        })
+        .catch(err => console.error("ERROR: " + err));
 }
