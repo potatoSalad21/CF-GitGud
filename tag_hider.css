@@ -1,3 +1,4 @@
+/* TODO: use a better selector for tags div */
 #sidebar > div:nth-child(11) {
-    visibility: hidden !important;
+    display: none !important;
 }

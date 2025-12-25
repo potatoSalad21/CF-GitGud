@@ -7,7 +7,6 @@ chrome.storage.sync.get(["hardEnabled"], ({ hardEnabled }) => {
 });
 
 hardbtn.onchange = () => {
-    console.log("fuck you")
     chrome.storage.sync.set({ hardEnabled: hardbtn.checked });
 
     chrome.runtime.sendMessage({
