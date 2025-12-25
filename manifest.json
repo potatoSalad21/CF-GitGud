@@ -4,13 +4,21 @@
   "version": "1.0",
   "manifest_version": 3,
   "permissions": [
-        "tabs",
-        "activeTab"
+    "tabs",
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "host_permissions": [
+    "https://*.codeforces.com/problemset/problem/*"
   ],
   "action": {
-    "default_popup": "main.html"
+    "default_popup": "popup.html"
   },
   "icons": {
-        "16": "assets/logo.png"
+    "16": "assets/logo.png"
   }
 }

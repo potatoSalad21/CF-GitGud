@@ -1,14 +1,20 @@
-function displayErr(err) {
-    msg.style.color = "red";
-    msg.innerHTML = err;
-}
-
-function randInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
 const API_URL = "https://codeforces.com/api/problemset.problems";
 const PROBLEM_URL = "https://codeforces.com/problemset/problem";
+
+
+chrome.storage.sync.get(["hardEnabled"], ({ hardEnabled }) => {
+    hardbtn.checked = !!hardEnabled;
+});
+
+hardbtn.onchange = () => {
+    console.log("fuck you")
+    chrome.storage.sync.set({ hardEnabled: hardbtn.checked });
+
+    chrome.runtime.sendMessage({
+        type: "TOGGLE_HARD",
+        enabled: hardbtn.checked
+    });
+};
 
 search.onsubmit = (e) => {
     e.preventDefault();
@@ -24,7 +30,14 @@ search.onsubmit = (e) => {
 
     const contestID = code.slice(0, code.length-1);
     const idx = code[code.length-1];
-    chrome.tabs.create({ url: `${PROBLEM_URL}/${contestID}/${idx}` });
+    chrome.tabs.create(
+        { url: `${PROBLEM_URL}/${contestID}/${idx}` },
+        (tab) => {
+            chrome.scripting.insertCSS({
+                target: { tabId: tab.id },
+                files: ["tag_hider.css"]
+            }).catch(err => console.error(err));
+        });
 }
 
 randbtn.onclick = () => {
@@ -43,3 +56,17 @@ randbtn.onclick = () => {
         })
         .catch(err => console.error("ERROR: " + err));
 }
+
+
+/*
+*   HELPER FUNCTIONS ~~
+*/
+function displayErr(err) {
+    msg.style.color = "red";
+    msg.innerHTML = err;
+}
+
+function randInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
