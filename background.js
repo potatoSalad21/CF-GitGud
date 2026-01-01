@@ -1,26 +1,34 @@
-chrome.runtime.onMessage.addListener(async (msg, sender) => {
+chrome.runtime.onMessage.addListener(async (msg, _sender) => {
     if (msg.type !== "TOGGLE_HARD") return;
 
-// TODO: toggle style for all open codeforces tabs
-    const [tab] = await chrome.tabs.query({
-        active: true,
-        currentWindow: true
+    const tabs = await chrome.tabs.query({
+        url: "*://*.codeforces.com/problemset/problem/*",
     });
-    if (!tab?.id || !tab?.url) return;
 
-    if (!tab.url.startsWith("https://codeforces.com") &&
-        !tab.url.startsWith("https://www.codeforces.com")) { return; }
+    for (const tab of tabs) {
+        chrome.scripting.executeScript({
+            target: { tabId: tab.id },
+            func: (enabled) => {
+                const sidebarDivs = document.body.querySelectorAll('#sidebar div div');
+                let parentBox;
+                sidebarDivs.forEach(div => {
+                    if (div.textContent.trim().includes("→ Problem tags")) {
+                        parentBox = div.closest('.roundbox');
+                    }
+                });
 
-    if (msg.enabled) {
-        chrome.scripting.insertCSS({
-            files: ["tag_hider.css"],
-            target: { tabId: tab.id }
-        });
-    } else {
-        chrome.scripting.removeCSS({
-            files: ["tag_hider.css"],
-            target: { tabId: tab.id }
-        });
+                if (enabled) {
+                    if (parentBox) {
+                        parentBox.classList.add('hide-meeee');
+                    }
+                } else {
+                    if (parentBox) {
+                        parentBox.classList.remove('hide-meeee');
+                    }
+                }
+            },
+            args: [msg.enabled],
+        }).catch(e => console.error(e));
     }
 });
 

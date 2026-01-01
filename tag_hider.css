@@ -1,4 +1,3 @@
-/* TODO: use a better selector for tags div */
-#sidebar > div:nth-child(11) {
+.hide-meeee {
     display: none !important;
 }
