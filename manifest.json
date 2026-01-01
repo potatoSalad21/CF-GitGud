@@ -12,19 +12,19 @@
   "content_scripts": [
     {
       "matches": ["*://*.codeforces.com/problemset/problem/*"],
-      "css": ["tag_hider.css"],
-      "js": ["content.js"],
+      "css": ["static/tag_hider.css"],
+      "js": ["src/content.js"],
       "run_at": "document_idle"
     }
   ],
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "src/background.js"
   },
   "host_permissions": [
     "*://*.codeforces.com/*"
   ],
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "static/popup.html"
   },
   "icons": {
     "16": "assets/logo.png"
