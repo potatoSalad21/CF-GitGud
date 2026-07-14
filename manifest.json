@@ -27,6 +27,7 @@
     "default_popup": "static/popup.html"
   },
   "icons": {
-    "16": "assets/logo.png"
+    "16": "assets/logo.png",
+    "128": "assets/logo.png"
   }
 }
